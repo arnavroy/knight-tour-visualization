@@ -6,7 +6,7 @@
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
  		<style type="text/css">
 		    table {
-		    	width: 60%;
+		    	width: 100%;
 				border: 5px solid black;
 		    }
 		    td {
@@ -19,7 +19,10 @@
 				background: white;
 			}
 			#canvas_container {
-				position: relative;`
+				position: relative;
+				width: 100%;
+				height: 100%;
+				z-index: 1000;
 			}
 			.invalid_coords {
 				border: 3px solid red;
@@ -37,16 +40,17 @@
  		
 		$(document).ready(init);
  	
- 		function createCanvasOverlay() {
+ 		function createCanvasLayer() {
  		    var canvasContainer = $('#canvas_container')[0];
-		    canvasContainer.style.width="100%";
-		    canvasContainer.style.height="100%";
-		    canvasContainer.style.zIndex="1000";
+
+			// Remove any pre-existing canvas.
+			$('#canvas_id').remove();
+
 		    var myCanvas = document.createElement('canvas');
-		    myCanvas.style.width = canvasContainer.scrollWidth+"px";
-		    myCanvas.style.height = canvasContainer.scrollHeight+"px";
-		    myCanvas.width=canvasContainer.scrollWidth;
-		    myCanvas.height=canvasContainer.scrollHeight;
+ 			myCanvas.style.width = '100%';
+ 			myCanvas.style.height = '100%';
+			myCanvas.width = $(canvasContainer).width();
+			myCanvas.height = $(canvasContainer).height();
 		    myCanvas.style.overflow = 'visible';
 		    myCanvas.style.position = 'absolute';
 			myCanvas.style.left = '0px';
@@ -57,7 +61,6 @@
 
 		function init() {
  			initChessBoard($('#chess_board_table')[0]);
-			createCanvasOverlay();
 			addEventHandlers();
 		}
 
@@ -95,7 +98,12 @@
 		}
 		
 		function trace(x, y) {
+
+            // Recreate the canvas.
+			createCanvasLayer();
+
 		    var canvas = $('#canvas_id')[0];
+
 			// Clear the canvas.
 			canvas.width = canvas.width;	
             var context = canvas.getContext('2d');
@@ -164,7 +172,7 @@
 	</script>
 	<body>
 		<div>
-			<p> The top left cell's coordinates are (0, 0) and the bottom right cell's coordinates are (7, 7).
+			<p> This is a demo of <a href="http://en.wikipedia.org/wiki/Knight's_tour">Kinght's Tour</a> on a 8x8 chess board. The top left cell's coordinates are (0, 0) and the bottom right cell's coordinates are (7, 7).
 			<br/>
 
             Knight's starting position: <input type="text" name="coords" value="x,y" id="coords">
