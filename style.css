@@ -1,0 +1,12 @@
+table {
+  width: 60%;
+  border: 5px solid black;
+}
+td { height: 100px }
+td.black { background: black }
+td.white { background: white }
+#canvas_container { position: relative }
+.invalid_coords { border: 3px solid red }
+.valid_coords { border: 3px solid green }
+
+
