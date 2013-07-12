@@ -789,9 +789,7 @@ function createCanvasOverlay() {
 }
 
 function init() {
-  console.log("init called");
   var testNode = $('#chess_board_table');
-  console.log(testNode);
   initChessBoard($('#chess_board_table')[0]);
   createCanvasOverlay();
   addEventHandlers();
@@ -803,10 +801,8 @@ function addEventHandlers() {
 
 function collectCoordsInput(e) {
   $('#trace').attr('disabled', 'disabled');
-  console.log('clicked!');
   var coords_input = $('#coords')[0];
   var coords_str = $('#coords').val();
-  console.log('coords: ' + coords_str);
   var coords_arr = coords_str.split(',');
   if (coords_arr.length != 2) {
     decorateCoordsInput(true);
@@ -815,7 +811,6 @@ function collectCoordsInput(e) {
   }
   var x_coord = parseInt(coords_arr[0].trim()),
     y_coord = parseInt(coords_arr[1].trim());
-  console.log("x_coord: " + x_coord + ", y_coord: " + y_coord);
   if (isNaN(x_coord) || isNaN(y_coord)) {
     decorateCoordsInput(true);
     $('#trace').removeAttr('disabled');
@@ -852,7 +847,6 @@ function trace(x, y) {
       y1 = parseInt(current_coord_arr[1].trim()),
       x2 = parseInt(next_coord_arr[0].trim()),
       y2 = parseInt(next_coord_arr[1].trim());
-    console.log('id : #x_' + x1 + ' _y_' + y1);
     var cell_x1_y1 = $('#x_' + x1 + '_y_' + y1)[0],
       cell_x2_y2 = $('#x_' + x2 + '_y_' + y2)[0];
     var cell_x1_y1_offset = $(cell_x1_y1).position(),
